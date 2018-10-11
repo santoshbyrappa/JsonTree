@@ -1,0 +1,14 @@
+<div class="page-header jumbotron jumbotron-fluid pt-3 pb-2 pl-3 pr-3">
+  <h2 class="display-4">My Dashboard</h2>
+  <button (click)="logout()">Logout</button>
+</div>
+<div class="container">
+  <div class="row">
+    <h2>Menus</h2>
+    <div class="col-md-12">
+      <ol style="padding:10px;">
+        <li *ngFor="let menu of menus">{{menu.title}}</li>
+      </ol>
+    </div>
+  </div>
+</div>

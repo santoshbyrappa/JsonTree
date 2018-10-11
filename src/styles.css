@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./bootstrap.min.css";
+.small-button {
+  height: 32px;
+}
+
+.form-check .form-check-input {
+  vertical-align: bottom;
+}
+
+section {
+  padding: 2rem 10px 1rem;
+  padding: 1.25rem 0 0;
+  margin-bottom: 15px;
+}
+
+section>.section-header {
+  display: flex;
+  flex: 1 1 100%;
+  padding: 10px 15px 10px;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+section>.section-header>* {
+  display: flex;
+  flex: 1 1 auto;
+  margin: 0;
+  align-items: baseline;
+}
+
+section>.section-header .left {
+  justify-content: flex-start;
+}
+
+section>.section-header .right {
+  justify-content: flex-end;
+}
+
+section>.section-body {
+  margin-top: 1rem;
+  padding: 0 1.25px;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.no-data p {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  font-weight: 300;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
