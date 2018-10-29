@@ -14,6 +14,8 @@ import { MessagesComponent } from './shared/components/messages/messages.compone
 // COMPONENTS
 import { AppComponent } from './app.component';
 import { MessageService } from './shared/components/messages/messages.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardService } from './dashboard/dashboard.service';
 
 const providers = [
 
@@ -21,7 +23,7 @@ const providers = [
 
   AuthgaurdService,
   MessageService,
-
+  DashboardService
 ];
 
 @NgModule({
@@ -30,7 +32,8 @@ const providers = [
   ],
   declarations: [
     AppComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

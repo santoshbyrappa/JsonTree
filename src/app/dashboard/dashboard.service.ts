@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +20,8 @@ export class DashboardService {
 
   Api_Url = environment.api_url;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              ) {
     this.url = this.Api_Url;
   }
 
@@ -38,11 +40,32 @@ export class DashboardService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  getMenus() {
-    return this.http.get<any>(this.url + '/menus', httpOptions)
+  get() {
+    return this.http.get<any>(this.url + '/employees', httpOptions)
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  post(data: Object){
+
+    return this.http.post<any>(this.url + '/employees', data)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+  update(id:string,data: Object){
+    return this.http.put<any>(this.url + '/employees/' + id, data)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  delete(id:string){
+    return this.http.delete<any>(this.url + '/employees/' + id)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
 }
