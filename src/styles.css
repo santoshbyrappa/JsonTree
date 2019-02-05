@@ -58,3 +58,19 @@ section>.section-body {
   font-weight: 300;
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+.btnDirectory i{
+  font-size: .6rem;
+}
+
+.folderIcon{
+    color: #FF9800;
+    padding: 0px 10px;
+}
+
+.btnDirectory{
+    padding: 2px;
+    height: 20px;
+    width: 20px;
+    line-height: 0rem;
+}

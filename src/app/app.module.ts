@@ -7,24 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 // MODULES
 import { HttpClientModule, HttpHeaders, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from './shared/services/http-interceptor.service';
-import { SharedModule } from './shared/shared.module';
-import { AuthgaurdService } from './shared/services/AuthgaurdService';
-import { MessagesComponent } from './shared/components/messages/messages.component';
 // COMPONENTS
 import { AppComponent } from './app.component';
-import { MessageService } from './shared/components/messages/messages.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardService } from './dashboard/dashboard.service';
+import { ListComponent } from './list/list.component';
 
-const providers = [
-
-  { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
-
-  AuthgaurdService,
-  MessageService,
-  DashboardService
-];
+const providers = [];
 
 @NgModule({
   schemas: [
@@ -32,15 +20,14 @@ const providers = [
   ],
   declarations: [
     AppComponent,
-    MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    SharedModule,
     NgbModule.forRoot(),
   ],
   providers: providers,

@@ -1,92 +1,69 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from '../shared/components/messages/messages.service';
-import { DashboardService } from './dashboard.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { commodities } from './folderjson';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  employees: any[];
-  emp: any;
-  constructor(private messageService: MessageService,
-              private dashboardService : DashboardService,
-              private router : Router,
-              private modalService : NgbModal) { 
-                this.employees = [];
-                this.emp={
-                  "header":"Create Employee",
-                  "data" : {}
-                }
+  commodities : any;
+  data : any[];
+  level2data : any[];
+  level3data : any[];
+  level4data : any[];
+  level : string;
+  constructor() { 
+      this.data = [];
+      this.level2data = [];
+      this.level3data = [];
+      this.level4data = [];
   }
 
   ngOnInit() {
-    this.employeeProcess('get',null,null);
+    this.commodities = commodities;
   }
 
-  employeeProcess(method:string,id:string,data:object){
-    var result;
-    switch(method) {
-      case "create":
-      result = this.dashboardService.post(data);
-      break;
-      case "edit":
-      result = this.dashboardService.update(id,data);
-      break;
-      case "delete":
-      result = this.dashboardService.delete(id);
-      break;
-      default:
-      result = this.dashboardService.get();
+  addSubLevels(commodities,condition){
+    if(condition == 'minus'){
+      this.data = [];
+    }else{
+      this.data = commodities.child ? commodities.termsrelation : [];
+      this.level2data = [];
+      this.level3data = [];
+      this.level4data = [];
     }
-    this.processData(result,method);    ``
   }
 
-  processData(data: any,method:string){
-    console.log(data);
-    data.subscribe(
-        data => {
-        if (data.error) {
-          this.messageService.add({ text: data.message, type: 'warning' });
-          this.modalService.dismissAll('employeeModal');
-          return;
-        }
-        if(method == "post" || method == "delete" || method == "edit" || method == "create") {
-          this.messageService.add({ text: data.message, type: 'Success' });
-          this.employeeProcess('get',null,null);
-        }else if(method == 'get'){
-          // login successful if there's a jwt token in the(message  response
-          if (data.data) {
-            this.employees = data.data.employees;
-            this.messageService.add({ text: "Employee dataList", type: 'Success' });
-            this.modalService.dismissAll('employeeModal');
-            
-
-          }
-        }
-      }, error => {
-        this.messageService.add({ text: error, type: 'warning' });
-        this.modalService.dismissAll('employeeModal');
-        console.log(error);
-      }
-    );
+  commoditChildren(ev){
+    if(ev.condition == 'minus'){
+      this.level2data = [];
+    }else{
+      this.level2data = ev.item.terms;
+      this.level3data = [];
+      this.level4data = [];
+    }
+    
   }
 
-  openModal(id: any,modal){
-    this.modalService.open(modal);
+  commoditSecondChildren(ev){
+    if(ev.condition == 'minus'){
+      this.level3data = [];
+    }else{
+      this.level3data = ev.item.child ? ev.item.termsrelation : [];
+      this.level4data = [];
+    }
+   
   }
 
-  closeModal(modal){
-    this.modalService.dismissAll(modal);
+  commoditThirdChildren(ev){
+    if(ev.condition == 'minus'){
+      this.level4data = [];
+    }else{
+      this.level4data = ev.item.terms;
+    }
   }
-
-  editEmployeeDetails(employee,modal){
-    this.emp.data = employee;
-    this.modalService.open(modal);
-  }
-
 
 }

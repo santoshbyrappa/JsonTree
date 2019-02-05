@@ -1,0 +1,47 @@
+<ul  [id]="level" class="jsonList">
+	<li *ngFor="let item of data; let i = index" [attr.data-index]="i">
+		<p>
+	      <button (click)="getChildren(item,data,'plus')" class="btnDirectory" 
+	      *ngIf='(item.condition == true) || (item.condition == undefined) ' >
+	        <i class="fa fa-plus"></i>
+	      </button>
+	      <button (click)="getChildren(item,data,'minus')" class="btnDirectory" *ngIf="!((item.condition == true) || (item.condition == undefined))">
+	        <i class="fa fa-minus"></i>
+	      </button>
+	       <i class="fa fa-folder folderIcon" ></i>{{item.name}}
+	    </p>
+	</li>
+
+	<li class="list1" *ngFor="let item of level2data; let j = index"   [attr.data-index]="0" >
+		<p>
+	      <button (click)="getSecondChildren(item,level2data,'plus')" class="btnDirectory" *ngIf='(item.condition == true) || (item.condition == undefined)'>
+	        <i class="fa fa-plus"></i>
+	      </button>
+	      <button (click)="getSecondChildren(item,level2data,'minus')" class="btnDirectory" *ngIf='!((item.condition == true) || (item.condition == undefined)) ' >
+	        <i class="fa fa-minus"></i>
+	      </button>
+	       <i class="fa fa-folder folderIcon" ></i>{{item.name}}
+	    </p>
+	</li>
+
+	<li class="list2"*ngFor="let item of level3data; let k = index"   [attr.data-index]="(k)">
+		<p>
+	      <button (click)="getThirdChildren(item,level3data,'plus')" class="btnDirectory" *ngIf='(item.condition == true) || (item.condition == undefined)'>
+	        <i class="fa fa-plus"></i>
+	      </button>
+	      <button (click)="getThirdChildren(item,level3data,'minus')" class="btnDirectory" *ngIf='!((item.condition == true) || (item.condition == undefined)) '>
+	        <i class="fa fa-minus"></i>
+	      </button>
+	       <i class="fa fa-folder folderIcon" ></i>{{item.rel}}
+	    </p>
+	</li>
+
+	<li class="list3"*ngFor="let item of level4data; let l = index"   [attr.data-index]="l">
+		<p>
+	      <button (click)="getFourthChildren(item,level4data,'plus')" class="btnDirectory" *ngIf='(item.condition == true) || (item.condition == undefined) ' >
+	        <i class="fa fa-plus"></i>
+	      </button>
+	       <i class="fa fa-folder folderIcon" ></i>{{item.name}}
+	    </p>
+	</li>
+</ul>

@@ -1,115 +1,20 @@
-<div class="page-header jumbotron jumbotron-fluid pt-3 pb-2 pl-3 pr-3">
+<!-- <div class="page-header jumbotron jumbotron-fluid pt-3 pb-2 pl-3 pr-3">
   <h2 class="display-6">Employee List</h2>
   <button  (click)="openModal(null,employeeModal)" class="btn btn-secondary buttonPosition">Create</button>
-</div>
+</div> -->
 <div class="container">
   <div class="row">
-    <div class="col-md-12" *ngIf="employees.length > 0">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Company</th>
-            <th>Designation</th>
-            <th>Address</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let employee of employees">
-            <td>{{employee.name}}</td>
-            <td>{{employee.email}}</td>
-            <td>{{employee.company}}</td>
-            <td>{{employee.designation}}</td>
-            <td>{{employee.address}}</td>
-            <td><button class="btn btn-secondary" (click)="editEmployeeDetails(employee,employeeModal)">Edit</button></td>
-            <td><button class="btn btn-secondary" (click)="employeeProcess('delete',employee._id,null)">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-12" *ngIf="employees.length == 0">
-      <h4>No Data Available</h4>
+    <div class="col-md-12">
+      <p>
+      <button (click)="addSubLevels(commodities,'add')" *ngIf="data.length == 0" class="btnDirectory">
+        <i class="fa fa-plus"></i>
+      </button>
+       <button (click)="addSubLevels(commodities,'minus')" *ngIf="data.length > 0" class="btnDirectory">
+        <i class="fa fa-minus"></i>
+      </button>
+       <i class="fa fa-folder folderIcon" ></i>{{commodities.name}}</p>
+      <app-list [data]="data" [level2data]="level2data" [level3data]="level3data" [level4data]="level4data" [level]="level" (exportChildren)="commoditChildren($event)" 
+      (exportsecondChildren)="commoditSecondChildren($event)" (exportThirdChildren)="commoditThirdChildren($event)"></app-list>
     </div>
   </div>
 </div>
-
-
-<ng-template #employeeModal>
-  <!-- The Modal -->      
-  <!-- Modal Header -->
-  <div class="modal-header">
-    <h4 class="modal-title">{{emp.header}}</h4>
-    <button type="button" class="close" (click) = "closeModal(employeeModal)">&times;</button>
-  </div>
-  
-  <!-- Modal body -->
-  <div class="modal-body">
-    <form>
-      <div class="row">
-        <!-- Name -->
-        <div class="form-group col-md-6">
-          <label for="title">Name</label>
-          <input type="text" name="title" [(ngModel)]="emp.data.name" id="title" placeholder="Enter Name" class="form-control">
-        </div>
-        <!-- email -->
-        <div class="form-group col-md-6">
-          <label for="email">Email</label>
-          <input type="email" name="email" placeholder="Enter Email" [(ngModel)]="emp.data.email" class="form-control">
-        </div>
-      </div>
-      <div class="row">
-        <!-- company -->
-        <div class="form-group col-md-6">
-          <label for="company">Company</label>
-          <input type="text" name="company" [(ngModel)]="emp.data.company" id="company" placeholder="Enter Company" class="form-control">
-
-        </div>
-        <!-- Designation -->
-        <div class="form-group col-md-6">
-          <label for="designation">Designation</label>
-          <input type="text" name="designation" [(ngModel)]="emp.data.designation" id="designation" placeholder="Enter Designation" class="form-control">
-
-        </div>
-      </div>
-      <div class="row">
-        <!-- Address -->
-        <div class="form-group col-md-6">
-          <label for="address">Address</label>
-          <input type="text" name="address" [(ngModel)]="emp.data.address" id="address" placeholder="Enter Address" class="form-control">
-
-        </div>
-        <!-- state -->
-        <div class="form-group col-md-6">
-          <label for="state">State</label>
-          <input type="text" name="state" [(ngModel)]="emp.data.state" id="state" placeholder="Enter State" class="form-control">
-
-        </div>
-      </div>
-      <div class="row">
-        <!-- country -->
-        <div class="form-group col-md-6">
-          <label for="country">Country</label>
-          <input type="text" name="country" [(ngModel)]="emp.data.country" id="country" placeholder="Enter country" class="form-control">
-
-        </div>
-        <!-- city -->
-        <div class="form-group col-md-6">
-          <label for="city">City</label>
-          <input type="text" name="city" [(ngModel)]="emp.data.city" id="city" placeholder="Enter city" class="form-control">
-
-        </div>
-      </div>
-    </form>
-  </div>
-  
-  <!-- Modal footer -->
-  <div class="modal-footer">
-    <button type="button" class="btn btn-danger" *ngIf="!emp.data._id" (click)="employeeProcess('create',null,emp.data)">Submit</button>
-    <button type="button" class="btn btn-danger" *ngIf="emp.data._id" (click)="employeeProcess('edit',emp.data._id,emp.data)">Submit</button>
-    <button type="button" class="btn btn-danger"  (click) = "closeModal(employeeModal)">Cancel</button>
-  </div>
-  <!-- The Modal End --> 
-</ng-template>
